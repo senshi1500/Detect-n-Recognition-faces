@@ -2,14 +2,14 @@ import cv2
 import os
 import face_recognition
 
-# ------------ READ DNN MODEL ------------
+
 # Model architecture
 prototxt = "model/deploy.prototxt"
 # Weights
 model = "model/res10_300x300_ssd_iter_140000.caffemodel"
 # Load the model
 net = cv2.dnn.readNetFromCaffe(prototxt, model)
-# ------- READ THE IMAGE AND PREPROCESSING -------
+
 path = "Rostros"
 facesEncodings = []
 facesNames = []
@@ -20,6 +20,7 @@ for file_name in os.listdir(path):
      facesEncodings.append(f_coding)
      facesNames.append(file_name.split(".")[0])
 
+
 image = cv2.imread("Reparto2.jpeg")
 height, width, _ = image.shape
 image_resized = cv2.resize(image, (300, 300))
@@ -27,7 +28,7 @@ image_resized = cv2.resize(image, (300, 300))
 blob = cv2.dnn.blobFromImage(image_resized, 1.0, (300, 300), (104, 117, 123))
 print("blob.shape: ", blob.shape)
 blob_to_show = cv2.merge([blob[0][0], blob[0][1], blob[0][2]])
-# ------- DETECTIONS AND PREDICTIONS ----------
+
 net.setInput(blob)
 detections = net.forward()
 
