@@ -44,7 +44,7 @@ for detection in detections[0][0]:
           img_rostro = cv2.cvtColor(img_rostro, cv2.COLOR_BGR2RGB)
           actual_face_encoding = face_recognition.face_encodings(img_rostro, known_face_locations=[(0, x_end-x_start, y_end-y_start, 0)])[0]
           result = face_recognition.compare_faces(facesEncodings, actual_face_encoding)
-          # print(result)
+
           if True in result:
                index = result.index(True)
                name = facesNames[index]
